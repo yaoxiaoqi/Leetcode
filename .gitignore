@@ -46,4 +46,4 @@ dist
 # config
 .env
 
-Leetcode.xcodeproj
+.xcodeproj
