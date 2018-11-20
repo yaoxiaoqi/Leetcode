@@ -12,10 +12,6 @@
 
 using namespace std;
 
-#define LEFT 1
-#define RIGHT 2
-
-
 //Definition for a binary tree node.
 struct TreeNode {
     int val;
@@ -51,7 +47,7 @@ public:
             if (nodes.empty()) {
                 break;
             }
-            
+
             TreeNode* tmp = nodes.top();
             answer.push_back(tmp->val);
             nodes.pop();

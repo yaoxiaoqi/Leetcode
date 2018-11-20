@@ -7,72 +7,37 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include <vector>
-#include <stack>
+
+#define ANSWER 6
 
 using namespace std;
 
-#define LEFT 1
-#define RIGHT 2
-
-
-//Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
-class BinaryTree {
-public:
-    TreeNode* load() {
-//        TreeNode tree = TreeNode(1);
-        TreeNode* root = new TreeNode(1);
-        root->left = new TreeNode(4);
-        root->left->right = new TreeNode(5);
-        root->right = new TreeNode(6);
-        root->right->left = new TreeNode(7);
-        root->right->right = new TreeNode(8);
-        return root;
-    }
-};
-
 class Solution {
 public:
-    vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> answer;
-        if (root == NULL) {
-            return answer;
-        }
-        stack<TreeNode*> nodes;
-        nodes.push(root);
-        while (true) {
-            if (nodes.empty()) {
-                break;
-            }
-            
-            TreeNode* tmp = nodes.top();
-            answer.push_back(tmp->val);
-            nodes.pop();
-            if (tmp -> right != NULL) {
-                nodes.push(tmp->right);
-            }
-            if (tmp->left != NULL) {
-                nodes.push(tmp->left);
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        int left = 0, right = int(arr.size())-k;
+        while(left < right) {
+            int mid = left + (right - left) / 2;
+            if (abs(x - arr[mid]) > abs(x - arr[mid+k])) {
+                left = mid + 1;
+            } else {
+                right = mid;
             }
         }
-        return answer;
+//        cout << left << "," << right << endl;
+        return vector<int>(arr.begin() + left, arr.begin() + (left + k));
     }
 };
 
 int main() {
-    BinaryTree b;
     Solution s;
-    TreeNode* root = b.load();
-    vector<int> answer = s.preorderTraversal(root);
-    for (auto i : answer) {
+    vector<int> a = {1, 2, 3, 4, 5};
+    
+    for(auto i : s.findClosestElements(a, 3, 4)) {
         cout << i << " ";
     }
     cout << endl;
+//    cout << s.findPeakElement(a) << endl;
 }
