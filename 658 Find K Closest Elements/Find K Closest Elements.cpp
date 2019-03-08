@@ -10,8 +10,6 @@
 #include <algorithm>
 #include <vector>
 
-#define ANSWER 6
-
 using namespace std;
 
 class Solution {
